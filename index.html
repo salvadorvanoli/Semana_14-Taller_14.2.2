@@ -9,10 +9,31 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/style.css">
-  
 </head>
 
 <body class="bg-dark">
+  <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasTopLabel"></h5>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          More
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#" id="dropdownYear"></a></li>
+          <li><a class="dropdown-item" href="#" id="dropdownLength"></a></li>
+          <li><a class="dropdown-item" href="#" id="dropdownBudget"></a></li>
+          <li><a class="dropdown-item" href="#" id="dropdownEarnings"></a></li>
+        </ul>
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <p id="offcanvasOverview"></p>
+      <p id="offcanvasGenres"></p>
+    </div>
+  </div>
+
   <main>
     <div class="text-center container">
       <div class="row py-lg-3">
@@ -42,7 +63,7 @@
   </footer>
 
   <script src="js/bootstrap.bundle.min.js"></script>
-
+  <script src="js/script.js"></script>
 </body>
 
 </html>
