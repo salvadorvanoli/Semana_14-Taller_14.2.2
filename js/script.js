@@ -3,16 +3,25 @@ let searchBar = document.getElementById("inputBuscar");
 let searchBtn = document.getElementById("btnBuscar");
 let fetchData = undefined;
 let lista = document.getElementById("lista");
+let cardDiv = document.getElementsByClassName("card");
+
+function findMovieById(idP){
+    let movie = fetchData.find(element => {
+        return element.id == idP;
+    })
+    return movie;
+}
 
 function getGenres(movie){
     let genresString = "";
     for(let genre of movie.genres){
-        genresString += " - " + genre;
+        genresString += " / " + genre.name;
     }
     return genresString;
 }
 
-function deployOffcanvas(movie){
+function deployOffcanvas(idP){
+    let movie = findMovieById(idP);
     let offcanvasTopLabel = document.getElementById("offcanvasTopLabel");
     let offcanvasOverview = document.getElementById("offcanvasOverview");
     let offcanvasGenres = document.getElementById("offcanvasGenres");
@@ -25,7 +34,7 @@ function deployOffcanvas(movie){
     offcanvasGenres.innerHTML = getGenres(movie);
     dropdownYear.innerHTML = movie.release_date;
     dropdownLength.innerHTML = movie.runtime;
-    dropdownBudget.innerHTML = movie.bugdet;
+    dropdownBudget.innerHTML = movie.budget;
     dropdownEarnings.innerHTML = movie.revenue;
 }
 
@@ -46,7 +55,7 @@ function transformToStars(number){
 
 function createMovieElement(movie){
     let newElement = 
-    `<div class="card" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" onclick="deployOffcanvas()"><h2>${movie.title}</h2> <p>${movie.tagline}</p> <span>${transformToStars(movie.vote_average)}</span></div>`;
+    `<div class="card" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" onclick="deployOffcanvas('${movie.id}')"><h2>${movie.title}</h2> <p>${movie.tagline}</p> <span>${transformToStars(movie.vote_average)}</span></div>`;
     return newElement;
 }
 
@@ -55,7 +64,6 @@ function searchMovie(data){
     let filteredMovies = data.filter(elemento => {
         return elemento.title.toLowerCase().includes(search) || elemento.tagline.toLowerCase().includes(search) || elemento.vote_average == search;
     });
-    console.log(filteredMovies);
     for(let movie of filteredMovies){
         let templi = document.createElement("li");
         templi = createMovieElement(movie);
@@ -65,10 +73,13 @@ function searchMovie(data){
 
 fetch(URL)
 .then(response => response.json())
-.then(data => fetchData = data)
+.then(data => {
+    fetchData = data
+})
 .catch(error => console.log(error));
 
 searchBtn.addEventListener("click", function(){
     searchMovie(fetchData);
 });
+
 
