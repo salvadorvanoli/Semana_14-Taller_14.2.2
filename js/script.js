@@ -5,12 +5,33 @@ let fetchData = undefined;
 let lista = document.getElementById("lista");
 let cardDiv = document.getElementsByClassName("card");
 
+// Transforma un float del 1 al 10 en una cantidad de estrellas redondeada de 1 a 5
+
+function transformToStars(number){
+    let stars = "";
+    let numberToOdd = Math.trunc(number);
+    if(numberToOdd % 2 != 0){
+        numberToOdd++;
+    }
+    for(let i = 0; i < (numberToOdd/2); i++){
+        stars += `<span class="fa fa-star checked"></span>`;
+    }
+    for(let i = 0; i < (5 - (numberToOdd/2)); i++){
+        stars += `<span class="fa fa-star"></span>`;
+    }
+    return stars;
+}
+
+// Dado un id, busca en la data del fetch una película coincidente
+
 function findMovieById(idP){
     let movie = fetchData.find(element => {
         return element.id == idP;
     })
     return movie;
 }
+
+// Crea un string con los géneros de una película
 
 function getGenres(movie){
     let genresString = "";
@@ -19,6 +40,8 @@ function getGenres(movie){
     }
     return genresString;
 }
+
+// Cambia los valores del offcanvas a los de la película que se clickeó
 
 function deployOffcanvas(idP){
     let movie = findMovieById(idP);
@@ -38,26 +61,15 @@ function deployOffcanvas(idP){
     dropdownEarnings.innerHTML = movie.revenue;
 }
 
-function transformToStars(number){
-    let stars = "";
-    let numberToOdd = Math.trunc(number);
-    if(numberToOdd % 2 != 0){
-        numberToOdd++;
-    }
-    for(let i = 0; i < (numberToOdd/2); i++){
-        stars += `<span class="fa fa-star checked"></span>`;
-    }
-    for(let i = 0; i < (5 - (numberToOdd/2)); i++){
-        stars += `<span class="fa fa-star"></span>`;
-    }
-    return stars;
-}
+// Crea un div que contiene los datos de una película
 
 function createMovieElement(movie){
     let newElement = 
     `<div class="card" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" onclick="deployOffcanvas('${movie.id}')"><h2>${movie.title}</h2> <p>${movie.tagline}</p> <span>${transformToStars(movie.vote_average)}</span></div>`;
     return newElement;
 }
+
+// Filtra y muestra las películas resultantes de la búsqueda
 
 function searchMovie(data){
     let search = searchBar.value.toLowerCase();
@@ -70,6 +82,8 @@ function searchMovie(data){
         lista.innerHTML += templi;
     }
 }
+
+// Fetch para traer la data de las películas del url
 
 fetch(URL)
 .then(response => response.json())
