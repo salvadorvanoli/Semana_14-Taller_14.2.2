@@ -55,10 +55,10 @@ function deployOffcanvas(idP){
     offcanvasTopLabel.innerHTML = movie.title;
     offcanvasOverview.innerHTML = movie.overview;
     offcanvasGenres.innerHTML = getGenres(movie);
-    dropdownYear.innerHTML = movie.release_date;
-    dropdownLength.innerHTML = movie.runtime;
-    dropdownBudget.innerHTML = movie.budget;
-    dropdownEarnings.innerHTML = movie.revenue;
+    dropdownYear.innerHTML = "Release date: " + movie.release_date;
+    dropdownLength.innerHTML = "Duration: " + movie.runtime + " mins";
+    dropdownBudget.innerHTML = "Budget: $" + movie.budget;
+    dropdownEarnings.innerHTML = "Revenue: $" + movie.revenue;
 }
 
 // Crea un div que contiene los datos de una película
@@ -72,9 +72,10 @@ function createMovieElement(movie){
 // Filtra y muestra las películas resultantes de la búsqueda
 
 function searchMovie(data){
+    lista.innerHTML = "";
     let search = searchBar.value.toLowerCase();
     let filteredMovies = data.filter(elemento => {
-        return elemento.title.toLowerCase().includes(search) || elemento.tagline.toLowerCase().includes(search) || elemento.vote_average == search;
+        return elemento.title.toLowerCase().includes(search) || elemento.tagline.toLowerCase().includes(search) || elemento.vote_average == search || elemento.genres.some(elem => elem.name.toLowerCase() === search);
     });
     for(let movie of filteredMovies){
         let templi = document.createElement("li");
