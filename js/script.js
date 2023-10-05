@@ -65,7 +65,16 @@ function deployOffcanvas(idP){
 
 function createMovieElement(movie){
     let newElement = 
-    `<div class="card" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" onclick="deployOffcanvas('${movie.id}')"><h2>${movie.title}</h2> <p>${movie.tagline}</p> <span>${transformToStars(movie.vote_average)}</span></div>`;
+    `<div class="bg-secondary p-3 m-3 border border-danger" onclick="deployOffcanvas('${movie.id}')" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+        <div class="row">
+            <h2 class="col-xs-12 col-sm-6 col-md-8 text-white">${movie.title}</h2>
+            <div class="col-xs-6 col-md-4 text-end">${transformToStars(movie.vote_average)}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 fst-italic text-white">${movie.tagline}</div>
+            <div class="clearfix visible-xs-block"></div>
+        </div>
+    </div>`;
     return newElement;
 }
 

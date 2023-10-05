@@ -14,7 +14,16 @@
 <body class="bg-dark">
   <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
     <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasTopLabel"></h5>
+      <h2 class="offcanvas-title" id="offcanvasTopLabel"></h2>
+      <div class="p-3 m-3">
+        <div class="row">
+            <div class="col-xs-6 col-md-4 text-end"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 fst-italic" id="offcanvasOverview"></div>
+            <div class="col-xs-6 fw-bold mt-3" id="offcanvasGenres"></div>
+        </div>
+      </div>
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           More
@@ -26,13 +35,10 @@
           <li><a class="dropdown-item" href="#" id="dropdownEarnings"></a></li>
         </ul>
       </div>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-      <p id="offcanvasOverview"></p>
-      <p id="offcanvasGenres"></p>
+      <button type="button" class="btn-close m-2" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
   </div>
+
 
   <main>
     <div class="text-center container">

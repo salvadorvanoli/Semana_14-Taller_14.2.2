@@ -26,11 +26,3 @@ main {
 .offcanvas-top{
     height: fit-content;
 }
-
-.card{
-    color:white;
-    border: 2px 2px darkgray;
-    background-color: gray;
-    padding: 2px;
-    margin: 2px;
-}
